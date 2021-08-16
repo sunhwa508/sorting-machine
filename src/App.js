@@ -5,7 +5,7 @@ import { Layout } from "./style/Layout";
 function App() {
   return (
     <Layout>
-      <Timer />
+      <Timer isKorea />
       <SortingMachine />
       <Timer />
     </Layout>
