@@ -44,7 +44,7 @@ function SortingMachine() {
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="1,3,6,20" value={number} onChange={e => handleChange(e)} />
         <button disabled={isWait} type="submit">
-          ►
+          START
         </button>
       </form>
       <div>
@@ -72,7 +72,7 @@ const Wrapper = styled.div`
   & form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
     & input {
       padding: 10px 0;
       border: none;
@@ -80,17 +80,13 @@ const Wrapper = styled.div`
     }
     & button {
       cursor: pointer;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
       background-color: #00b800;
       border: 0;
+      padding: 10px 0;
+      margin: 5px 0;
+      text-align: center;
       color: #000;
       font-weight: bold;
-      font-size: 40px;
-      text-align: center;
-      padding-left: 10px;
-      margin: 10px;
     }
   }
   & div {
