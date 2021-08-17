@@ -1,13 +1,13 @@
-const selectPivot = (left, right, array, flag) => {
+const selectPivot = (left, right, array, reverseFlag) => {
   let targetArray = [...array];
   const centerIndex = Math.floor((left + right) / 2);
 
-  const change = (firstIndex, secondIndex, array, flag) => {
+  const change = (firstIndex, secondIndex, array, reverseFlag) => {
     const changedArray = [...array];
     if (
-      (flag == 0 && targetArray[firstIndex] > targetArray[secondIndex]) ||
-      (flag == 1 && targetArray[firstIndex] < targetArray[secondIndex]) ||
-      flag === -1
+      (reverseFlag == 0 && targetArray[firstIndex] > targetArray[secondIndex]) ||
+      (reverseFlag == 1 && targetArray[firstIndex] < targetArray[secondIndex]) ||
+      reverseFlag === -1
     ) {
       const tmp = changedArray[firstIndex];
       changedArray[firstIndex] = changedArray[secondIndex];
@@ -15,16 +15,16 @@ const selectPivot = (left, right, array, flag) => {
     }
     return changedArray;
   };
-  targetArray = change(left, centerIndex, targetArray, flag);
-  targetArray = change(centerIndex, right, targetArray, flag);
-  targetArray = change(left, centerIndex, targetArray, flag);
+  targetArray = change(left, centerIndex, targetArray, reverseFlag);
+  targetArray = change(centerIndex, right, targetArray, reverseFlag);
+  targetArray = change(left, centerIndex, targetArray, reverseFlag);
 
   targetArray = change(centerIndex, right - 1, targetArray, -1);
 
   return [targetArray[right - 1], targetArray];
 };
 
-const quickSort = (array, flag = 0) => {
+const quickSort = (array, reverseFlag = 0) => {
   if (array.length <= 1) {
     return array;
   }
@@ -37,15 +37,15 @@ const quickSort = (array, flag = 0) => {
     let [left, right] = range.pop();
     let [pl, pr] = [left, right];
     let pivot;
-    [pivot, targetArray] = selectPivot(left, right, targetArray, flag);
+    [pivot, targetArray] = selectPivot(left, right, targetArray, reverseFlag);
 
     pl += 1;
     pr -= 2;
     while (pl <= pr) {
-      while ((flag == 0 && targetArray[pl] < pivot) || (flag == 1 && targetArray[pl] > pivot)) {
+      while ((reverseFlag == 0 && targetArray[pl] < pivot) || (reverseFlag == 1 && targetArray[pl] > pivot)) {
         pl++;
       }
-      while ((flag == 0 && targetArray[pr] > pivot) || (flag == 1 && targetArray[pr] < pivot)) {
+      while ((reverseFlag == 0 && targetArray[pr] > pivot) || (reverseFlag == 1 && targetArray[pr] < pivot)) {
         pr--;
       }
       if (pl <= pr) {
