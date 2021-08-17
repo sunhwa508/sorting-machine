@@ -25,7 +25,7 @@ const selectPivot = (left, right, array, reverseFlag) => {
 };
 
 const quickSort = (array, reverseFlag = 0) => {
-  if (array.length <= 1) {
+  if (array.length <= 1 || (reverseFlag !== 0 && reverseFlag !== 1)) {
     return array;
   }
 
