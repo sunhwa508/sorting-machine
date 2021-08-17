@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ascendingSort, descendingSort } from "../../utils/Algorithm";
+import { quickSort } from "../../utils/quickSort";
 import styled from "styled-components";
 
 function SortingMachine() {
@@ -16,10 +16,14 @@ function SortingMachine() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    setAscendedList(ascendingSort(number.split(",").filter((element, i) => element !== "")));
+    const numberArray = number
+      .split(",")
+      .filter(element => element !== "")
+      .map(e => Number(e));
+    setAscendedList(quickSort(numberArray));
     setIsWait(true);
     setTimeout(() => {
-      setDescendedList(descendingSort(number.split(",").filter((element, i) => element !== "")));
+      setDescendedList(quickSort(numberArray, true));
       setIsWait(false);
     }, 3000);
   };
@@ -39,7 +43,9 @@ function SortingMachine() {
     <Wrapper>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="1,3,6,20" value={number} onChange={e => handleChange(e)} />
-        <button type="submit">START</button>
+        <button disabled={isWait} type="submit">
+          ►
+        </button>
       </form>
       <div>
         <p>ascended-list</p> <br />
@@ -47,7 +53,11 @@ function SortingMachine() {
       </div>
       <div>
         <p>descended-list</p> <br />
-        {isWait ? counter : descendedList.map(item => (descendedList.indexOf(item) !== descendedList.length - 1 ? item + "," : item + ""))}
+        {isWait ? (
+          <span>{counter}</span>
+        ) : (
+          descendedList.map(item => (descendedList.indexOf(item) !== descendedList.length - 1 ? item + "," : item + ""))
+        )}
       </div>
     </Wrapper>
   );
@@ -59,25 +69,28 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 20px 0;
-  font-family: "Press Start 2P", cursive;
   & form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     & input {
       padding: 10px 0;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       border: none;
       background-color: gray;
     }
     & button {
       cursor: pointer;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
       background-color: #00b800;
       border: 0;
-      padding: 10px 0;
-      margin: 5px 0;
-      text-align: center;
       color: #000;
       font-weight: bold;
+      font-size: 40px;
+      text-align: center;
+      padding-left: 10px;
+      margin: 10px;
     }
   }
   & div {
@@ -94,6 +107,10 @@ const Wrapper = styled.div`
     color: #00b800;
     & p {
       font-size: 12px;
+    }
+    & span {
+      color: #ffd643;
+      font-size: 15px;
     }
   }
 `;
