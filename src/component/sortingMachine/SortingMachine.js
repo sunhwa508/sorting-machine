@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { sort_ascending, sort_descending } from "../../utils/Algorithm";
+import { ascendingSort, descendingSort } from "../../utils/Algorithm";
 import styled from "styled-components";
 
 function SortingMachine() {
@@ -8,20 +8,18 @@ function SortingMachine() {
   const [descendedList, setDescendedList] = useState([]);
   const [isWait, setIsWait] = useState(false);
   const [counter, setCounter] = useState(3);
+
   const handleChange = ({ target: { value } }) => {
-    setNumber(value);
+    setNumber(value.trim());
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (number.charAt(number.length - 1).charCodeAt(0) === 44) {
-      setNumber(number.slice(0, -1));
-    }
 
-    setAscendedList(sort_ascending(number.split(",").filter((element, i) => element !== "")));
+    setAscendedList(ascendingSort(number.split(",").filter((element, i) => element !== "")));
     setIsWait(true);
     setTimeout(() => {
-      setDescendedList(sort_descending(number.split(",").filter((element, i) => element !== "")));
+      setDescendedList(descendingSort(number.split(",").filter((element, i) => element !== "")));
       setIsWait(false);
     }, 3000);
   };

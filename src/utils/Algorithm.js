@@ -1,4 +1,4 @@
-export const sort_ascending = arr => {
+export const ascendingSort = arr => {
   if (arr.length < 1) {
     return ["Please enter a number"];
   }
@@ -21,7 +21,7 @@ export const sort_ascending = arr => {
   }
   return arr;
 };
-export const sort_descending = arr => {
+export const descendingSort = arr => {
   if (arr.length < 1) {
     return ["Please enter a number"];
   }

@@ -19,8 +19,8 @@ function Timer({ isKorea }) {
   };
 
   const getTime = () => {
-    let options1 = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
-    let options2 = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+    let options1 = { year: "numeric", month: "long", day: "numeric", weekday: "long", hour: "numeric", minute: "numeric", second: "numeric" };
+    let options2 = { year: "numeric", month: "long", day: "numeric", weekday: "long", hour: "numeric", minute: "numeric", second: "numeric" };
     options2.timeZone = "America/Los_Angeles";
     options1.timeZone = "Asia/Seoul";
     const krTime = new Date().toLocaleString("ko-KR", options1);
