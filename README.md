@@ -35,6 +35,6 @@
 
 ## referance
 
-[시간대를 기준으로 변환하고 싶은 날짜](https://www.python2.net/questions-899018.htm)
-[bubble sorting](https://gmlwjd9405.github.io/2018/05/06/algorithm-bubble-sort.html)
-[quick sorting](https://gmlwjd9405.github.io/2018/05/10/algorithm-quick-sort.html)
+[시간대를 기준으로 변환하고 싶은 날짜](https://www.python2.net/questions-899018.htm)<br/>
+[bubble sorting](https://gmlwjd9405.github.io/2018/05/06/algorithm-bubble-sort.html)<br/>
+[quick sorting](https://gmlwjd9405.github.io/2018/05/10/algorithm-quick-sort.html)<br/>

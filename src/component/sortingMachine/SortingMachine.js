@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sort_ascending, sort_descending } from "../../utils/Algorithm";
 import styled from "styled-components";
 
@@ -6,7 +6,8 @@ function SortingMachine() {
   const [number, setNumber] = useState("");
   const [ascendedList, setAscendedList] = useState([]);
   const [descendedList, setDescendedList] = useState([]);
-
+  const [isWait, setIsWait] = useState(false);
+  const [counter, setCounter] = useState(3);
   const handleChange = ({ target: { value } }) => {
     setNumber(value);
   };
@@ -17,11 +18,24 @@ function SortingMachine() {
       setNumber(number.slice(0, -1));
     }
 
+    setAscendedList(sort_ascending(number.split(",").filter((element, i) => element !== "")));
+    setIsWait(true);
     setTimeout(() => {
-      setAscendedList(sort_ascending(number.split(",").filter((element, i) => element !== "")));
       setDescendedList(sort_descending(number.split(",").filter((element, i) => element !== "")));
-    }, 1000);
+      setIsWait(false);
+    }, 3000);
   };
+
+  useEffect(() => {
+    if (isWait && counter > 0) {
+      setTimeout(() => {
+        setCounter(counter => counter - 1);
+      }, 1000);
+    } else if (counter === 0) {
+      setIsWait(false);
+      setCounter(3);
+    }
+  }, [counter, isWait]);
 
   return (
     <Wrapper>
@@ -35,7 +49,7 @@ function SortingMachine() {
       </div>
       <div>
         <p>descended-list</p> <br />
-        {descendedList.map(item => (descendedList.indexOf(item) !== descendedList.length - 1 ? item + "," : item + ""))}
+        {isWait ? counter : descendedList.map(item => (descendedList.indexOf(item) !== descendedList.length - 1 ? item + "," : item + ""))}
       </div>
     </Wrapper>
   );
@@ -77,7 +91,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     border: 1px solid #ddd;
     overflow: hidden;
-    padding: 20px 0;
+    padding: 20px 10px;
     margin: 10px 0;
     color: #00b800;
     & p {

@@ -1,7 +1,10 @@
 export const sort_ascending = arr => {
+  if (arr.length < 1) {
+    return ["Please enter a number"];
+  }
   for (let k = 0; k < arr.length; k++) {
     if (isNaN(arr[k])) {
-      return ["형식에 맞는 값을 넣어주세요!"];
+      return ["Invalid NUMBER !!"];
     }
   }
   let minIndex, temp, i, j;
@@ -19,9 +22,12 @@ export const sort_ascending = arr => {
   return arr;
 };
 export const sort_descending = arr => {
+  if (arr.length < 1) {
+    return ["Please enter a number"];
+  }
   for (let k = 0; k < arr.length; k++) {
     if (isNaN(arr[k])) {
-      return ["형식에 맞는 값을 넣어주세요!"];
+      return ["Invalid NUMBER !!"];
     }
   }
   let minIndex, temp, i, j;

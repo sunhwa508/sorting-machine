@@ -1,17 +1,35 @@
 import { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 function Timer({ isKorea }) {
   const [time, setTime] = useState({
     korea: "",
     usa: "",
   });
+  const getKoreaTime = () => {
+    let options1 = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+    options1.timeZone = "Asia/Seoul";
+
+    const krTime = new Date().toLocaleString("ko-KR", options1);
+
+    setTime({
+      ...time,
+      korea: krTime,
+    });
+  };
 
   const getTime = () => {
-    const krTime = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
-    const usaTime = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+    let options1 = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+    let options2 = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+    options2.timeZone = "America/Los_Angeles";
+    options1.timeZone = "Asia/Seoul";
+    const krTime = new Date().toLocaleString("ko-KR", options1);
+    const usaTime = new Date().toLocaleString("en-US", options2);
 
-    setTime({ korea: krTime.toLocaleString(), usa: usaTime.toLocaleString() });
+    setTime({
+      korea: krTime,
+      usa: usaTime,
+    });
   };
 
   useEffect(() => {
@@ -23,15 +41,6 @@ function Timer({ isKorea }) {
 
   return <Wrapper>{isKorea ? time.korea : time.usa}</Wrapper>;
 }
-
-const spin = keyframes`
-  0% {
-    transform: rotate(-360deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
 
 const Wrapper = styled.div`
   height: 100px;
