@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { quickSort } from "../../utils/quickSort";
 import styled from "styled-components";
-
+import { INVALID_MESSAGE, WAITING_MESSAGE, EMPTY_MESSAGE } from "../../utils/constants";
 function SortingMachine() {
   const [number, setNumber] = useState("");
   const [ascendedList, setAscendedList] = useState([]);
@@ -16,24 +16,32 @@ function SortingMachine() {
   const handleSubmit = event => {
     event.preventDefault();
 
+    let errorMessage = null;
+
     if (number === "") {
-      return;
+      errorMessage = EMPTY_MESSAGE;
     }
 
-    let isInvalid = false;
     const numberArray = number
       .split(",")
       .filter(element => element !== "")
       .map(e => {
-        if (isNaN(e)) {
-          isInvalid = true;
+        if (!errorMessage && isNaN(e)) {
+          errorMessage = INVALID_MESSAGE;
         }
         return Number(e);
       });
-    setAscendedList(isInvalid ? ["형식에 맞는 값을 넣어주세요!"] : quickSort(numberArray));
+
+    if (errorMessage) {
+      setAscendedList([errorMessage]);
+      setDescendedList([errorMessage]);
+      return;
+    }
+
+    setAscendedList(quickSort(numberArray));
     setIsWait(true);
     setTimeout(() => {
-      setDescendedList(isInvalid ? ["형식에 맞는 값을 넣어주세요!"] : quickSort(numberArray, true));
+      setDescendedList(quickSort(numberArray, true));
       setIsWait(false);
     }, 3000);
   };
@@ -54,19 +62,19 @@ function SortingMachine() {
       <form onSubmit={handleSubmit}>
         <input disabled={isWait} type="text" placeholder="1,3,6,20" value={number} onChange={e => handleChange(e)} />
         <Button isWait={isWait} disabled={isWait} type="submit">
-          {isWait ? "Plesse Wait..." : "START"}
+          {isWait ? WAITING_MESSAGE : "START"}
         </Button>
       </form>
       <div>
         <p>ascended-list</p> <br />
-        {ascendedList.map(item => (ascendedList.indexOf(item) !== ascendedList.length - 1 ? item + "," : item + ""))}
+        {ascendedList.map((item, index, array) => (index !== array.length - 1 ? item.toString() + "," : item.toString() + ""))}
       </div>
       <div>
         <p>descended-list</p> <br />
         {isWait ? (
           <span>{counter}</span>
         ) : (
-          descendedList.map(item => (descendedList.indexOf(item) !== descendedList.length - 1 ? item + "," : item + ""))
+          descendedList.map((item, index, array) => (index !== array.length - 1 ? item.toString() + "," : item.toString() + ""))
         )}
       </div>
     </Wrapper>
@@ -88,10 +96,16 @@ const Wrapper = styled.div`
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       border: none;
       background-color: gray;
+      outline: none;
+      &:focus {
+        background-color: darkgray;
+      }
     }
   }
   & div {
     min-width: 300px;
+    max-width: 700px;
+    word-break: break-word;
     border-radius: 15px;
     display: flex;
     justify-content: center;

@@ -25,9 +25,6 @@ const selectPivot = (left, right, array, flag) => {
 };
 
 const quickSort = (array, flag = 0) => {
-  // flag === false or 0 : 오름차순
-  // flag === true or 1 : 내림차순
-
   if (array.length <= 1) {
     return array;
   }
