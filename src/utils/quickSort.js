@@ -5,8 +5,8 @@ const selectPivot = (left, right, array, flag) => {
   const change = (firstIndex, secondIndex, array, flag) => {
     const changedArray = [...array];
     if (
-      (flag === 0 && targetArray[firstIndex] > targetArray[secondIndex]) ||
-      (flag === 1 && targetArray[firstIndex] < targetArray[secondIndex]) ||
+      (flag == 0 && targetArray[firstIndex] > targetArray[secondIndex]) ||
+      (flag == 1 && targetArray[firstIndex] < targetArray[secondIndex]) ||
       flag === -1
     ) {
       const tmp = changedArray[firstIndex];
@@ -45,10 +45,10 @@ const quickSort = (array, flag = 0) => {
     pl += 1;
     pr -= 2;
     while (pl <= pr) {
-      while ((flag === 0 && targetArray[pl] < pivot) || (flag === 1 && targetArray[pl] > pivot)) {
+      while ((flag == 0 && targetArray[pl] < pivot) || (flag == 1 && targetArray[pl] > pivot)) {
         pl++;
       }
-      while ((flag === 0 && targetArray[pr] > pivot) || (flag === 1 && targetArray[pr] < pivot)) {
+      while ((flag == 0 && targetArray[pr] > pivot) || (flag == 1 && targetArray[pr] < pivot)) {
         pr--;
       }
       if (pl <= pr) {

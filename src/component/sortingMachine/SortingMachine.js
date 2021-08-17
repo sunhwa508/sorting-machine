@@ -16,14 +16,24 @@ function SortingMachine() {
   const handleSubmit = event => {
     event.preventDefault();
 
+    if (number === "") {
+      return;
+    }
+
+    let isInvalid = false;
     const numberArray = number
       .split(",")
       .filter(element => element !== "")
-      .map(e => Number(e));
-    setAscendedList(quickSort(numberArray));
+      .map(e => {
+        if (isNaN(e)) {
+          isInvalid = true;
+        }
+        return Number(e);
+      });
+    setAscendedList(isInvalid ? ["형식에 맞는 값을 넣어주세요!"] : quickSort(numberArray));
     setIsWait(true);
     setTimeout(() => {
-      setDescendedList(quickSort(numberArray, true));
+      setDescendedList(isInvalid ? ["형식에 맞는 값을 넣어주세요!"] : quickSort(numberArray, true));
       setIsWait(false);
     }, 3000);
   };
@@ -42,10 +52,10 @@ function SortingMachine() {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="1,3,6,20" value={number} onChange={e => handleChange(e)} />
-        <button disabled={isWait} type="submit">
-          START
-        </button>
+        <input disabled={isWait} type="text" placeholder="1,3,6,20" value={number} onChange={e => handleChange(e)} />
+        <Button isWait={isWait} disabled={isWait} type="submit">
+          {isWait ? "Plesse Wait..." : "START"}
+        </Button>
       </form>
       <div>
         <p>ascended-list</p> <br />
@@ -69,24 +79,15 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 20px 0;
+  font-family: "Press Start 2P", cursive;
   & form {
     display: flex;
     flex-direction: column;
-
     & input {
       padding: 10px 0;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       border: none;
       background-color: gray;
-    }
-    & button {
-      cursor: pointer;
-      background-color: #00b800;
-      border: 0;
-      padding: 10px 0;
-      margin: 5px 0;
-      text-align: center;
-      color: #000;
-      font-weight: bold;
     }
   }
   & div {
@@ -109,6 +110,17 @@ const Wrapper = styled.div`
       font-size: 15px;
     }
   }
+`;
+
+const Button = styled.button`
+  cursor: ${props => (props.isWait ? "default" : "pointer")};
+  background-color: ${props => (props.isWait ? "#FFD643" : "#00b800")};
+  border: 0;
+  padding: 10px 0;
+  margin: 5px 0;
+  text-align: center;
+  color: #000;
+  font-weight: bold;
 `;
 
 export { SortingMachine };
