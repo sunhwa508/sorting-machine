@@ -49,4 +49,4 @@
 
 [시간대를 기준으로 변환하고 싶은 날짜](https://www.python2.net/questions-899018.htm)<br/>
 [toLocalString 메소드](https://www.w3schools.com/jsref/jsref_tolocalestring.asp)<br/>
-[Do it! 자료구조와 함께 배우는 알고리즘 입문 - 파이썬 편 (Bohyoh Shibata 저)](http://www.yes24.com/Product/Goods/91219874)<br/>
+[Quick Sort](http://www.yes24.com/Product/Goods/91219874) - 도서<br/>
