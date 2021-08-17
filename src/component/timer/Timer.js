@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 function Timer({ isKorea }) {
   const [time, setTime] = useState({
@@ -24,15 +24,24 @@ function Timer({ isKorea }) {
   return <Wrapper>{isKorea ? time.korea : time.usa}</Wrapper>;
 }
 
+const spin = keyframes`
+  0% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
 const Wrapper = styled.div`
   height: 100px;
-  width: 300px;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  overflow: hidden;
+  color: #00b800;
+  text-align: center;
+  background-color: #000;
 `;
 
 export { Timer };

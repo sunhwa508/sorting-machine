@@ -27,6 +27,13 @@
 빌드하는 명령어로 현재 설정되어있는 환경 변수에 따라 빌드 됩니다.
 (cra 기본설정)
 
+## 배포
+
+> Netlify 무료배포 사이트를 이용하였습니다.
+
+[Sorting Machine GO 🏄🏻](https://goofy-engelbart-36e2d0.netlify.app)
+
 ## referance
 
 [시간대를 기준으로 변환하고 싶은 날짜](https://www.python2.net/questions-899018.htm)
+[bubble sorting](https://gmlwjd9405.github.io/2018/05/06/algorithm-bubble-sort.html)
