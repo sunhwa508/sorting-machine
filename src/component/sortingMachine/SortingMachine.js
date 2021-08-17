@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { bubbleSort_ascending, bubbleSort_descending } from "../../utils/Algorithm";
+import { sort_ascending, sort_descending } from "../../utils/Algorithm";
 import styled from "styled-components";
 
 function SortingMachine() {
@@ -18,8 +18,8 @@ function SortingMachine() {
     }
 
     setTimeout(() => {
-      setAscendedList(bubbleSort_ascending(number.split(",").filter((element, i) => element !== "")));
-      setDescendedList(bubbleSort_descending(number.split(",").filter((element, i) => element !== "")));
+      setAscendedList(sort_ascending(number.split(",").filter((element, i) => element !== "")));
+      setDescendedList(sort_descending(number.split(",").filter((element, i) => element !== "")));
     }, 1000);
   };
 
@@ -42,7 +42,6 @@ function SortingMachine() {
 }
 
 const Wrapper = styled.div`
-  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +69,7 @@ const Wrapper = styled.div`
     }
   }
   & div {
-    width: 300px;
+    min-width: 300px;
     border-radius: 15px;
     display: flex;
     justify-content: center;
