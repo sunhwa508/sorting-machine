@@ -45,7 +45,7 @@
 
 <br/>
 
-## referance
+## reference
 
 [시간대를 기준으로 변환하고 싶은 날짜](https://www.python2.net/questions-899018.htm)<br/>
 [toLocalString 메소드](https://www.w3schools.com/jsref/jsref_tolocalestring.asp)<br/>
